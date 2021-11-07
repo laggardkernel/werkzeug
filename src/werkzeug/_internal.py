@@ -343,6 +343,8 @@ class _DictAccessorProperty(t.Generic[_TAccessorValue]):
     ) -> None:
         self.name = name
         self.default = default
+        # CO(lk): load_func: process before reading out; dump_func: process
+        #  before save.
         self.load_func = load_func
         self.dump_func = dump_func
         if read_only is not None:

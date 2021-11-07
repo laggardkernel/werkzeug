@@ -165,6 +165,8 @@ class Local:
             raise AttributeError(name) from None
 
     def __setattr__(self, name: str, value: t.Any) -> None:
+        # TODO(lk): why copy set? the values is unmodifiable obj?
+        #  Or running problem?
         values = self._storage.get({}).copy()
         values[name] = value
         self._storage.set(values)
@@ -243,6 +245,7 @@ class LocalStack:
         if stack is None:
             return None
         elif len(stack) == 1:
+            # CO(lk): storage.set({})
             release_local(self._local)
             return stack[-1]
         else:

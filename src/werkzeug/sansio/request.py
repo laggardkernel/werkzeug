@@ -202,6 +202,7 @@ class Request:
     def full_path(self) -> str:
         """Requested path, including the query string."""
         return f"{self.path}?{_to_str(self.query_string, self.url_charset)}"
+        # WARN(lk): full_path doesn't include root_path. Check url() instead.
 
     @property
     def is_secure(self) -> bool:
